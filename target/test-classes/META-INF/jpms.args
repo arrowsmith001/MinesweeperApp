@@ -1,0 +1,4 @@
+--patch-module
+com.arrowsmith.minesweeperapp=_
+--add-reads
+com.arrowsmith.minesweeperapp=ALL-UNNAMED

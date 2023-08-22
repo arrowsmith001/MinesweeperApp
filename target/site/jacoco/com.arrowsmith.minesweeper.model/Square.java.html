@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Square.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MinesweeperApp</a> &gt; <a href="index.source.html" class="el_package">com.arrowsmith.minesweeper.model</a> &gt; <span class="el_source">Square.java</span></div><h1>Square.java</h1><pre class="source lang-java linenums">package com.arrowsmith.minesweeper.model;
+
+import com.arrowsmith.minesweeper.exceptions.MineUncoveredException;
+import com.arrowsmith.minesweeperapp.SquareState;
+
+import java.util.LinkedList;
+import java.util.List;
+
+public class Square
+{
+
+    public SquareState getState() {
+<span class="nc bnc" id="L13" title="All 2 branches missed.">        if(!isRevealed)</span>
+        {
+<span class="nc bnc" id="L15" title="All 2 branches missed.">            if(isFlagged)</span>
+            {
+<span class="nc" id="L17">                return SquareState.flagged;</span>
+            }
+            else
+            {
+<span class="nc" id="L21">                return SquareState.hidden;</span>
+            }
+        }
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        else if(hasMine)</span>
+        {
+<span class="nc" id="L26">            return SquareState.mined;</span>
+        }
+        else
+        {
+<span class="nc" id="L30">            final int neighborCount = getNeighborMineCount();</span>
+<span class="nc bnc" id="L31" title="All 2 branches missed.">            if(neighborCount &gt; 0)</span>
+            {
+<span class="nc" id="L33">                return SquareState.numbered;</span>
+            }
+<span class="nc" id="L35">            else return SquareState.empty;</span>
+        }
+    }
+
+    public boolean setIsFlagged;
+
+<span class="fc" id="L41">    public Square(Coordinate coordinate) {</span>
+<span class="fc" id="L42">        this.coordinate = coordinate;</span>
+<span class="fc" id="L43">    }</span>
+
+    final Coordinate coordinate;
+
+<span class="fc" id="L47">    final List&lt;Square&gt; neighbors = new LinkedList&lt;Square&gt;();</span>
+
+    public void addNeighbor(Square squareToAdd) {
+<span class="fc" id="L50">        neighbors.add(squareToAdd);</span>
+<span class="fc bfc" id="L51" title="All 2 branches covered.">        if(squareToAdd.hasMine) neighborMineCount++;</span>
+<span class="fc" id="L52">    }</span>
+
+
+    public boolean hasMine;
+    public boolean isFlagged;
+    public boolean isRevealed;
+
+    public void setHasMine(boolean hasMine) {
+<span class="fc" id="L60">        this.hasMine = hasMine;</span>
+<span class="fc" id="L61">    }</span>
+
+    public boolean getHasMine() {
+<span class="nc" id="L64">        return hasMine;</span>
+    }
+<span class="fc" id="L66">    private int neighborMineCount = 0;</span>
+
+    public int getNeighborMineCount() {
+<span class="fc" id="L69">        return neighborMineCount;</span>
+    }
+
+    public void select() {
+
+        // Any selected square will reveal itself
+<span class="fc" id="L75">        isRevealed = true;</span>
+
+        // If this square has a mine, the game ends
+<span class="pc bpc" id="L78" title="1 of 2 branches missed.">        if(hasMine)</span>
+        {
+<span class="nc" id="L80">            System.out.println(&quot;You lose!&quot;);</span>
+<span class="nc" id="L81">            return;</span>
+        }
+
+        // If this square has any neighboring mines, selection process stops
+<span class="pc bpc" id="L85" title="1 of 2 branches missed.">        if(hasNeighboringMines()) return;</span>
+
+        // For all neighbors, select them if:
+        //      - They have no mine
+        //      - They aren't already revealed - this prevents infinite loops
+<span class="nc bnc" id="L90" title="All 2 branches missed.">        for (Square neighbor : neighbors)</span>
+        {
+<span class="nc bnc" id="L92" title="All 4 branches missed.">            if(!neighbor.hasMine &amp;&amp; !neighbor.isRevealed)</span>
+            {
+<span class="nc" id="L94">                neighbor.select();</span>
+            }
+<span class="nc" id="L96">        }</span>
+<span class="nc" id="L97">    }</span>
+
+
+
+    protected boolean hasNeighboringMines() {
+<span class="pc bpc" id="L102" title="1 of 2 branches missed.">        return getNeighborMineCount() &gt; 0;</span>
+    }
+
+    public void toggleFlagged() {
+<span class="pc bpc" id="L106" title="1 of 2 branches missed.">        isFlagged = !isFlagged;</span>
+<span class="fc" id="L107">    }</span>
+
+    public boolean getIsRevealed() {
+<span class="fc" id="L110">        return isRevealed;</span>
+    }
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

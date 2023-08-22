@@ -1,0 +1,14 @@
+GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
+MinesweeperApp,com.arrowsmith.minesweeper.model,Coordinate,0,15,0,0,0,5,0,2,0,2
+MinesweeperApp,com.arrowsmith.minesweeper.model,Minesweeper,45,25,8,0,9,8,7,4,3,4
+MinesweeperApp,com.arrowsmith.minesweeper.model,Grid.new ArrayList() {...},0,129,0,0,0,10,0,1,0,1
+MinesweeperApp,com.arrowsmith.minesweeper.model,Square,54,63,18,6,18,18,13,9,2,8
+MinesweeperApp,com.arrowsmith.minesweeper.model,Difficulty,0,39,0,0,0,2,0,1,0,1
+MinesweeperApp,com.arrowsmith.minesweeper.model,MinesweeperOptions,71,94,8,2,24,33,12,13,4,13
+MinesweeperApp,com.arrowsmith.minesweeper.model,BoardSize,0,27,0,0,0,2,0,1,0,1
+MinesweeperApp,com.arrowsmith.minesweeper.model,Grid,21,257,2,26,9,51,4,24,2,12
+MinesweeperApp,com.arrowsmith.minesweeper.exceptions,MineUncoveredException,3,0,0,0,1,0,1,0,1,0
+MinesweeperApp,com.arrowsmith.minesweeperapp,SquareViewModel,63,0,6,0,19,0,10,0,5,0
+MinesweeperApp,com.arrowsmith.minesweeperapp,MinesweeperApplication,38,0,0,0,11,0,3,0,3,0
+MinesweeperApp,com.arrowsmith.minesweeperapp,MinesweeperController,191,0,14,0,35,0,10,0,3,0
+MinesweeperApp,com.arrowsmith.minesweeperapp,SquareState,33,0,0,0,2,0,1,0,1,0

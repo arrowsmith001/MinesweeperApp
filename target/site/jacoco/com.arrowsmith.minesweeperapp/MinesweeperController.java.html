@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MinesweeperController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">MinesweeperApp</a> &gt; <a href="index.source.html" class="el_package">com.arrowsmith.minesweeperapp</a> &gt; <span class="el_source">MinesweeperController.java</span></div><h1>MinesweeperController.java</h1><pre class="source lang-java linenums">package com.arrowsmith.minesweeperapp;
+
+import com.arrowsmith.minesweeper.model.Coordinate;
+import com.arrowsmith.minesweeper.model.Grid;
+import com.arrowsmith.minesweeper.model.Minesweeper;
+import com.arrowsmith.minesweeper.model.Square;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.fxml.FXML;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.*;
+
+<span class="nc" id="L16">public class MinesweeperController {</span>
+    public GridPane gridPane;
+
+
+    @FXML
+    SquareViewModel[][] vms;
+
+<span class="nc" id="L23">    final Minesweeper ms = new Minesweeper();</span>
+
+    public void start(){
+
+<span class="nc" id="L27">        final double d = 30.0;</span>
+
+<span class="nc" id="L29">        ms.generateGrid();</span>
+<span class="nc" id="L30">        final Grid grid = ms.grid;</span>
+
+<span class="nc" id="L32">        gridPane.getRowConstraints().clear();</span>
+<span class="nc" id="L33">        gridPane.getColumnConstraints().clear();</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        for (int i = 0; i &lt; ms.grid.columns; i++) {</span>
+<span class="nc" id="L35">            gridPane.getRowConstraints().add(new RowConstraints(d));</span>
+        }
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        for (int j = 0; j &lt; ms.grid.rows; j++) {</span>
+<span class="nc" id="L38">            gridPane.getColumnConstraints().add(new ColumnConstraints(d));</span>
+        }
+
+
+<span class="nc" id="L42">        vms = new SquareViewModel[grid.rows][grid.columns];</span>
+
+<span class="nc bnc" id="L44" title="All 2 branches missed.">        for (int i = 0; i &lt; grid.rows; i++) {</span>
+<span class="nc bnc" id="L45" title="All 2 branches missed.">            for (int j = 0; j &lt; grid.columns; j++) {</span>
+
+<span class="nc" id="L47">                final Square square = grid.getSquareAtCoordinate(new Coordinate(i, j));</span>
+<span class="nc" id="L48">                final SquareViewModel vm = new SquareViewModel(square);</span>
+
+
+<span class="nc" id="L51">                final Label label = (Label) vm.getLabel();</span>
+<span class="nc" id="L52">                label.setPrefSize(d, d);</span>
+<span class="nc" id="L53">                label.setAlignment(Pos.CENTER);</span>
+
+<span class="nc" id="L55">                label.addEventHandler(MouseEvent.MOUSE_CLICKED, this::onTileClicked);</span>
+
+<span class="nc" id="L57">                vms[i][j] = vm;</span>
+<span class="nc" id="L58">                gridPane.add(label, i, j);</span>
+            }
+        }
+
+<span class="nc" id="L62">    }</span>
+
+    private void onTileClicked(MouseEvent event) {
+
+<span class="nc" id="L66">        System.out.println(event);</span>
+
+<span class="nc" id="L68">        Node node = (Node) event.getSource();</span>
+
+<span class="nc" id="L70">        int column = GridPane.getRowIndex(node);</span>
+<span class="nc" id="L71">        int row = GridPane.getColumnIndex(node);</span>
+
+<span class="nc" id="L73">        System.out.println(&quot;addEventHandler: &quot; + row + &quot; &quot; + column);</span>
+
+<span class="nc" id="L75">        Square square = ms.grid.getSquareAtCoordinate(new Coordinate(row, column));</span>
+
+<span class="nc bnc" id="L77" title="All 2 branches missed.">        if(square != null)</span>
+        {
+<span class="nc" id="L79">            square.select();</span>
+        }
+
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        for (int i = 0; i &lt; ms.grid.rows; i++) {</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">            for (int j = 0; j &lt; ms.grid.columns; j++) {</span>
+<span class="nc" id="L84">                vms[i][j].setText();</span>
+            }
+        }
+
+<span class="nc" id="L88">    }</span>
+
+}
+
+
+class SquareViewModel
+{
+<span class="nc" id="L95">    private final Label label = new Label();</span>
+
+    private final Square square;
+
+<span class="nc" id="L99">    public SquareViewModel(Square square) {</span>
+<span class="nc" id="L100">        label.textProperty().bind(textProperty);</span>
+<span class="nc" id="L101">        this.square = square;</span>
+<span class="nc" id="L102">        setText();</span>
+<span class="nc" id="L103">    }</span>
+
+<span class="nc" id="L105">    StringProperty textProperty = new SimpleStringProperty();</span>
+
+    public final String getText() {
+<span class="nc" id="L108">        return textProperty.get();</span>
+    }
+    public final void setText() {
+<span class="nc" id="L111">        final String text = stateToLabelText(square.getState());</span>
+<span class="nc" id="L112">        textProperty.set(text);</span>
+<span class="nc" id="L113">    }</span>
+
+
+
+    public String stateToLabelText(SquareState state)
+    {
+<span class="nc bnc" id="L119" title="All 6 branches missed.">        switch (state)</span>
+        {
+            case hidden -&gt; {
+<span class="nc" id="L122">                return &quot;?&quot;;</span>
+            }
+            case flagged -&gt; {
+<span class="nc" id="L125">                return &quot;#&quot;;</span>
+            }
+            case empty -&gt; {
+<span class="nc" id="L128">                return &quot;&quot;;</span>
+            }
+            case numbered -&gt; {
+<span class="nc" id="L131">                return Integer.toString(square.getNeighborMineCount());</span>
+            }
+            case mined -&gt; {
+<span class="nc" id="L134">                return &quot;X&quot;;</span>
+            }
+        }
+
+<span class="nc" id="L138">        return null;</span>
+    }
+
+
+    public Node getLabel() {
+<span class="nc" id="L143">        return label;</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
