@@ -1,25 +1,17 @@
 package com.arrowsmith.minesweeperapp;
 
-import com.arrowsmith.minesweeper.exceptions.MineUncoveredException;
 import com.arrowsmith.minesweeper.model.Coordinate;
 import com.arrowsmith.minesweeper.model.Grid;
 import com.arrowsmith.minesweeper.model.Minesweeper;
 import com.arrowsmith.minesweeper.model.Square;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.Paint;
-import javafx.scene.text.Text;
-import javafx.scene.text.TextAlignment;
 
 public class MinesweeperController {
     public GridPane gridPane;

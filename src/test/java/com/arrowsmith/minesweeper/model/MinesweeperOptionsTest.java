@@ -22,7 +22,25 @@ class MinesweeperOptionsTest {
 
     @Test
     @DisplayName("Higher Difficulty on Same Board Size has More Mines")
-    void setDifficulty() {
+    void moreMinesOnHigherDifficulty() {
+
+        final MinesweeperOptions options = new MinesweeperOptions();
+
+        options.setBoardSize(BoardSize.Medium);
+        options.setDifficulty(Difficulty.Easy);
+
+        final int easyNumberOfMines = options.getNumberOfMines();
+
+        options.setDifficulty(Difficulty.Hard);
+
+        final int hardNumberOfMines = options.getNumberOfMines();
+
+        assertTrue(easyNumberOfMines < hardNumberOfMines);
+    }
+
+    @Test
+    @DisplayName("Higher Difficulty on Same Board Size has More Mines")
+    void moreMinesOnHigherDifficulty() {
 
         final MinesweeperOptions options = new MinesweeperOptions();
 
