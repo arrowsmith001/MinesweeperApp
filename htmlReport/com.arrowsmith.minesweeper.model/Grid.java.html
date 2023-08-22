@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Grid.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jacoco.exec</a> &gt; <a href="index.source.html" class="el_package">com.arrowsmith.minesweeper.model</a> &gt; <span class="el_source">Grid.java</span></div><h1>Grid.java</h1><pre class="source lang-java linenums">package com.arrowsmith.minesweeper.model;
+
+
+import com.arrowsmith.minesweeper.exceptions.MineUncoveredException;
+
+import java.util.*;
+import java.util.stream.IntStream;
+
+public class Grid
+{
+    public Grid(MinesweeperOptions options)
+<span class="fc" id="L12">    {</span>
+
+<span class="fc" id="L14">        rows = options.getNumberOfRows();</span>
+<span class="fc" id="L15">        columns = options.getNumberOfColumns();</span>
+<span class="fc" id="L16">        mines = options.getNumberOfMines();</span>
+
+<span class="fc" id="L18">        generateBoard();</span>
+<span class="fc" id="L19">    }</span>
+
+
+    public final int rows;
+    public final int columns;
+    final int mines;
+
+    private Square[][] squaresArray;
+
+    public Square getSquareAtCoordinate(Coordinate coordinate)
+    {
+        try
+        {
+<span class="fc" id="L32">            return squaresArray[coordinate.row][coordinate.column];</span>
+<span class="nc" id="L33">        }catch(ArrayIndexOutOfBoundsException e)</span>
+        {
+<span class="nc" id="L35">            return null;</span>
+        }
+    }
+
+
+    private void generateBoard() {
+
+<span class="fc" id="L42">        addSquares();</span>
+
+<span class="fc" id="L44">        addMines();</span>
+
+<span class="fc" id="L46">        addNeighborsToSquares();</span>
+
+<span class="fc" id="L48">    }</span>
+
+
+    private void addSquares() {
+
+        // 2D Array - for instant querying
+<span class="fc" id="L54">        squaresArray = new Square[rows][columns];</span>
+
+<span class="fc bfc" id="L56" title="All 2 branches covered.">        for (int i = 0; i &lt; rows; i++) {</span>
+
+<span class="fc" id="L58">            final List&lt;Square&gt; rowList = new LinkedList&lt;&gt;();</span>
+
+<span class="fc bfc" id="L60" title="All 2 branches covered.">            for (int j = 0; j &lt; columns; j++)</span>
+            {
+<span class="fc" id="L62">                final Coordinate coordinate = new Coordinate(i, j);</span>
+<span class="fc" id="L63">                final Square square = new Square(coordinate);</span>
+
+<span class="fc" id="L65">                squaresArray[i][j] = square;</span>
+<span class="fc" id="L66">                rowList.add(square);</span>
+            }
+        }
+
+
+<span class="fc" id="L71">    }</span>
+
+    private void addNeighborsToSquares() {
+
+<span class="fc bfc" id="L75" title="All 2 branches covered.">        for (int i = 0; i &lt; rows; i++) {</span>
+<span class="fc bfc" id="L76" title="All 2 branches covered.">            for (int j = 0; j &lt; columns; j++) {</span>
+
+<span class="fc" id="L78">                final Square square = getSquareAtCoordinate(new Coordinate(i, j));</span>
+<span class="fc" id="L79">                addNeighbors(square);</span>
+            }
+        }
+
+<span class="fc" id="L83">    }</span>
+
+    private void addNeighbors(Square square)
+    {
+<span class="fc" id="L87">        final Coordinate coordinate = square.coordinate;</span>
+<span class="fc" id="L88">        final List&lt;Coordinate&gt; neighborCoordinates = new ArrayList&lt;&gt;()</span>
+<span class="fc" id="L89">        {</span>
+            {
+<span class="fc" id="L91">                add(new Coordinate(coordinate.row - 1, coordinate.column + 1));</span>
+<span class="fc" id="L92">                add(new Coordinate(coordinate.row - 1, coordinate.column));</span>
+<span class="fc" id="L93">                add(new Coordinate(coordinate.row - 1, coordinate.column - 1));</span>
+<span class="fc" id="L94">                add(new Coordinate(coordinate.row, coordinate.column + 1));</span>
+<span class="fc" id="L95">                add(new Coordinate(coordinate.row, coordinate.column - 1));</span>
+<span class="fc" id="L96">                add(new Coordinate(coordinate.row + 1, coordinate.column + 1));</span>
+<span class="fc" id="L97">                add(new Coordinate(coordinate.row + 1, coordinate.column));</span>
+<span class="fc" id="L98">                add(new Coordinate(coordinate.row + 1, coordinate.column - 1));</span>
+<span class="fc" id="L99">            }</span>
+        };
+
+<span class="fc bfc" id="L102" title="All 2 branches covered.">        neighborCoordinates.removeIf(c -&gt; !isValidCoordinate(c));</span>
+
+<span class="fc" id="L104">        neighborCoordinates.forEach(c -&gt;</span>
+        {
+<span class="fc" id="L106">            final Square neighbor = getSquareAtCoordinate(c);</span>
+<span class="pc bpc" id="L107" title="1 of 2 branches missed.">            if(neighbor != null) square.addNeighbor(neighbor);</span>
+<span class="fc" id="L108">        });</span>
+<span class="fc" id="L109">    }</span>
+
+    private boolean isValidCoordinate(Coordinate c) {
+<span class="fc bfc" id="L112" title="All 4 branches covered.">        final boolean isNonNegative = c.column &gt;= 0 &amp;&amp; c.row &gt;=0;</span>
+<span class="fc bfc" id="L113" title="All 4 branches covered.">        final boolean isInBounds = c.column &lt; columns &amp;&amp; c.row &lt; rows;</span>
+<span class="fc bfc" id="L114" title="All 4 branches covered.">        return isNonNegative &amp;&amp; isInBounds;</span>
+    }
+
+    private Coordinate indexToCoordinate(int i) {
+<span class="fc" id="L118">        return new Coordinate(i / columns, i % columns);</span>
+    }
+
+    private void addMines()
+    {
+        // New array from 0 to end of grid
+<span class="fc" id="L124">        final List&lt;Integer&gt; indexes = new ArrayList&lt;&gt;(IntStream.range(0, rows * columns).boxed().toList());</span>
+
+        // Get a random subset of these indices
+<span class="fc" id="L127">        Collections.shuffle(indexes);</span>
+<span class="fc" id="L128">        final Set&lt;Integer&gt; randomIndices = new HashSet&lt;Integer&gt;(indexes.subList(0, mines - 1));</span>
+
+        // Add mines at those indices
+<span class="fc bfc" id="L131" title="All 2 branches covered.">        for(int index : randomIndices)</span>
+        {
+<span class="fc" id="L133">            final Coordinate coordinate = indexToCoordinate(index);</span>
+<span class="fc" id="L134">            final Square square = getSquareAtCoordinate(coordinate);</span>
+
+<span class="fc" id="L136">            square.setHasMine(true);</span>
+
+<span class="fc" id="L138">        }</span>
+<span class="fc" id="L139">    }</span>
+
+
+    public void selectSquare(Coordinate coordinate) {
+<span class="nc" id="L143">        System.out.println(&quot;Selecting &quot; + coordinate);</span>
+<span class="nc" id="L144">        final Square square = getSquareAtCoordinate(coordinate);</span>
+<span class="nc" id="L145">        square.select();</span>
+<span class="nc" id="L146">    }</span>
+
+    public void reset() {
+<span class="nc" id="L149">        generateBoard();</span>
+<span class="nc" id="L150">    }</span>
+
+    public void flagSquare(Coordinate coordinate) {
+
+<span class="fc" id="L154">        System.out.println(&quot;Flagging &quot; + coordinate);</span>
+<span class="fc" id="L155">        final Square square = getSquareAtCoordinate(coordinate);</span>
+<span class="pc bpc" id="L156" title="1 of 2 branches missed.">        if(square.getIsRevealed())</span>
+        {
+<span class="nc" id="L158">            System.out.println(&quot;Cannot flag a revealed square&quot;);</span>
+        }
+<span class="fc" id="L160">        else square.toggleFlagged();</span>
+<span class="fc" id="L161">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MinesweeperApplication.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jacoco.exec</a> &gt; <a href="index.source.html" class="el_package">com.arrowsmith.minesweeperapp</a> &gt; <span class="el_source">MinesweeperApplication.java</span></div><h1>MinesweeperApplication.java</h1><pre class="source lang-java linenums">package com.arrowsmith.minesweeperapp;
+
+import com.arrowsmith.minesweeper.exceptions.MineUncoveredException;
+import com.arrowsmith.minesweeper.model.*;
+import javafx.application.Application;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.TilePane;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Scanner;
+
+// TODO: Databind
+
+<span class="nc" id="L26">public class MinesweeperApplication extends Application {</span>
+
+    @Override
+    public void start(Stage stage) throws IOException {
+
+<span class="nc" id="L31">        FXMLLoader fxmlLoader = new FXMLLoader(MinesweeperApplication.class.getResource(&quot;hello-view.fxml&quot;));</span>
+<span class="nc" id="L32">        Scene scene = new Scene(fxmlLoader.load(), 1500, 750);</span>
+
+<span class="nc" id="L34">        stage.setTitle(&quot;Minesweeper&quot;);</span>
+<span class="nc" id="L35">        stage.setScene(scene);</span>
+
+<span class="nc" id="L37">        MinesweeperController c = fxmlLoader.getController();</span>
+<span class="nc" id="L38">        c.start();</span>
+
+<span class="nc" id="L40">        stage.show();</span>
+<span class="nc" id="L41">    }</span>
+
+
+    public static void main(String[] args) {
+<span class="nc" id="L45">        launch();</span>
+<span class="nc" id="L46">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

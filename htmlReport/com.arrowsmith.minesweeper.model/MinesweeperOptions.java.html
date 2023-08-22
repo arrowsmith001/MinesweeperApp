@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MinesweeperOptions.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jacoco.exec</a> &gt; <a href="index.source.html" class="el_package">com.arrowsmith.minesweeper.model</a> &gt; <span class="el_source">MinesweeperOptions.java</span></div><h1>MinesweeperOptions.java</h1><pre class="source lang-java linenums">package com.arrowsmith.minesweeper.model;
+
+// TODO: Figure out fully flexible difficulty settings
+public class MinesweeperOptions {
+<span class="fc" id="L5">    static int DEFAULT_ROW_COUNT = 5;</span>
+<span class="fc" id="L6">    static int DEFAULT_COLUMN_COUNT = 10;</span>
+<span class="fc" id="L7">    static int DEFAULT_MINE_COUNT = 12;</span>
+    public Difficulty difficulty;
+    public BoardSize boardSize;
+
+<span class="fc" id="L11">    public MinesweeperOptions(){</span>
+<span class="fc" id="L12">        setOptions(Difficulty.Medium, BoardSize.Medium);</span>
+<span class="fc" id="L13">    }</span>
+
+<span class="nc" id="L15">    public MinesweeperOptions(Difficulty difficulty, BoardSize boardSize) {</span>
+<span class="nc" id="L16">        setOptions(difficulty, boardSize);</span>
+<span class="nc" id="L17">    }</span>
+
+    private void setOptions(Difficulty difficulty, BoardSize boardSize) {
+<span class="fc" id="L20">        this.difficulty = difficulty;</span>
+<span class="fc" id="L21">        this.boardSize = boardSize;</span>
+
+<span class="fc" id="L23">        setNumberOfRowsAndColumns(boardSize);</span>
+
+<span class="fc" id="L25">        int numberOfSquares = numberOfColumns * numberOfRows;</span>
+
+<span class="fc" id="L27">        setNumberOfMines(numberOfSquares, difficulty);</span>
+<span class="fc" id="L28">    }</span>
+
+    private void setNumberOfMines(int numberOfSquares, Difficulty difficulty) {
+<span class="pc bpc" id="L31" title="5 of 6 branches missed.">        switch (difficulty)</span>
+        {
+            case Infantile -&gt; {
+<span class="nc" id="L34">                numberOfMines = (int) (numberOfSquares * 0.05);</span>
+<span class="nc" id="L35">            }</span>
+            case Easy -&gt; {
+<span class="nc" id="L37">                numberOfMines = (int) (numberOfSquares * 0.1);</span>
+<span class="nc" id="L38">            }</span>
+            case Medium -&gt; {
+<span class="fc" id="L40">                numberOfMines = (int) (numberOfSquares * 0.2);</span>
+<span class="fc" id="L41">            }</span>
+            case Hard -&gt; {
+<span class="nc" id="L43">                numberOfMines = (int) (numberOfSquares * 0.3);</span>
+<span class="nc" id="L44">            }</span>
+            case Impossible -&gt; {
+<span class="nc" id="L46">                numberOfMines = (int) (numberOfSquares * 0.4);</span>
+            }
+        }
+
+<span class="fc" id="L50">        numberOfMines = Math.max(numberOfMines, 2);</span>
+<span class="fc" id="L51">    }</span>
+
+    private void setNumberOfRowsAndColumns(BoardSize boardSize) {
+<span class="pc bpc" id="L54" title="3 of 4 branches missed.">        switch (boardSize)</span>
+        {
+            case Small -&gt; {
+<span class="nc" id="L57">                this.numberOfRows = 5;</span>
+<span class="nc" id="L58">                this.numberOfColumns = 10;</span>
+<span class="nc" id="L59">            }</span>
+            case Medium -&gt; {
+<span class="fc" id="L61">                this.numberOfRows = 8;</span>
+<span class="fc" id="L62">                this.numberOfColumns = 12;</span>
+<span class="fc" id="L63">            }</span>
+            case Large -&gt; {
+<span class="nc" id="L65">                this.numberOfRows = 20;</span>
+<span class="nc" id="L66">                this.numberOfColumns = 48;</span>
+            }
+        }
+
+<span class="fc" id="L70">    }</span>
+
+<span class="nc" id="L72">    public MinesweeperOptions(int numberOfRows, int numberOfColumns, int numberOfMines) {</span>
+<span class="nc" id="L73">        this.numberOfRows = numberOfRows;</span>
+<span class="nc" id="L74">        this.numberOfColumns = numberOfColumns;</span>
+<span class="nc" id="L75">        this.numberOfMines = numberOfMines;</span>
+<span class="nc" id="L76">    }</span>
+
+    private int numberOfRows;
+    private int numberOfColumns;
+    private int numberOfMines;
+
+
+    public int getNumberOfRows() {
+<span class="fc" id="L84">        return numberOfRows;</span>
+    }
+
+    public int getNumberOfColumns() {
+<span class="fc" id="L88">        return numberOfColumns;</span>
+    }
+
+    public int getNumberOfMines() {
+<span class="fc" id="L92">        return numberOfMines;</span>
+    }
+
+
+    public void setNumberOfRows(int numberOfRows) {
+<span class="fc" id="L97">        this.numberOfRows = numberOfRows;</span>
+<span class="fc" id="L98">    }</span>
+    public void setNumberOfColumns(int numberOfColumns) {
+<span class="fc" id="L100">        this.numberOfColumns = numberOfColumns;</span>
+<span class="fc" id="L101">    }</span>
+    public void setNumberOfMines(int numberOfMines) {
+<span class="fc" id="L103">        this.numberOfMines = numberOfMines;</span>
+<span class="fc" id="L104">    }</span>
+
+    public Difficulty getDifficulty() {
+<span class="fc" id="L107">        return difficulty;</span>
+    }
+    public void setDifficulty(Difficulty difficulty) {
+<span class="nc" id="L110">        this.difficulty = difficulty;</span>
+<span class="nc" id="L111">    }</span>
+
+    public BoardSize getBoardSize() {
+<span class="fc" id="L114">        return boardSize;</span>
+    }
+
+    public void setBoardSize(BoardSize boardSize) {
+<span class="nc" id="L118">        this.boardSize = boardSize;</span>
+<span class="nc" id="L119">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>

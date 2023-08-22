@@ -6,6 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="a5c7843d-6d1b-4b09-9283-4a0da12b249f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -16,6 +17,7 @@
     <option name="myAddOrReplace" value="1" />
   </component>
   <component name="ExportToHTMLSettings">
+    <option name="OPEN_IN_BROWSER" value="true" />
     <option name="OUTPUT_DIRECTORY" value="D:\Documents\TSI\Projects\MinesweeperApp\htmlReport" />
   </component>
   <component name="FileTemplateManagerImpl">
@@ -41,16 +43,16 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary&quot;: &quot;JUnit5&quot;,
-    &quot;com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5&quot;: &quot;&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Documents/TSI/Projects/MinesweeperApp/src/main/java/com/arrowsmith/minesweeper&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary": "JUnit5",
+    "com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit5": "",
+    "git-widget-placeholder": "main",
+    "last_opened_file_path": "D:/Documents/TSI/Projects/MinesweeperApp/target/jacoco.exec"
   }
-}</component>
+}]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\Documents\TSI\Projects\MinesweeperApp\src\main\java\com\arrowsmith\minesweeper" />
@@ -65,7 +67,7 @@
       <recent name="com.arrowsmith.minesweeper.model" />
     </key>
   </component>
-  <component name="RunManager" selected="JUnit.MinesweeperTest.generateGrid">
+  <component name="RunManager" selected="JUnit..* and 3 more">
     <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.arrowsmith.minesweeperapp.MinesweeperApplication" />
       <module name="MinesweeperApp" />
@@ -73,25 +75,22 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="MinesweeperTest.generateGrid" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+    <configuration name=".* and 3 more" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
       <module name="MinesweeperApp" />
-      <extension name="coverage">
-        <pattern>
-          <option name="PATTERN" value="com.arrowsmith.minesweeper.model.*" />
-          <option name="ENABLED" value="true" />
-        </pattern>
-      </extension>
-      <option name="PACKAGE_NAME" value="com.arrowsmith.minesweeper.model" />
-      <option name="MAIN_CLASS_NAME" value="com.arrowsmith.minesweeper.model.MinesweeperTest" />
-      <option name="METHOD_NAME" value="generateGrid" />
-      <option name="TEST_OBJECT" value="method" />
+      <option name="TEST_OBJECT" value="pattern" />
+      <patterns>
+        <pattern testClass=".*" />
+        <pattern testClass="com.arrowsmith.*" />
+        <pattern testClass="com.arrowsmith.minesweeper.*" />
+        <pattern testClass="com.arrowsmith.minesweeperapp.*" />
+      </patterns>
       <method v="2">
         <option name="Make" enabled="true" />
       </method>
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="JUnit.MinesweeperTest.generateGrid" />
+        <item itemvalue="JUnit..* and 3 more" />
       </list>
     </recent_temporary>
   </component>
@@ -108,6 +107,8 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MinesweeperApp$Unnamed.ic" NAME="Unnamed Coverage Results" MODIFIED="1692715993418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/MinesweeperApp$___and_3_more.ic" NAME=".* and 3 more Coverage Results" MODIFIED="1692717815417" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="D:\Documents\TSI\Projects\MinesweeperApp\target\jacoco.exec" NAME="jacoco.exec" MODIFIED="1692717869329" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="jacoco" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
     <SUITE FILE_PATH="coverage/MinesweeperApp$MinesweeperTest_generateGrid.ic" NAME="MinesweeperTest.generateGrid Coverage Results" MODIFIED="1692716440476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>com.arrowsmith.minesweeper.model.*</FILTER>
     </SUITE>

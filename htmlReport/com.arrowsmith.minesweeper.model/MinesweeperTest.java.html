@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MinesweeperTest.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">jacoco.exec</a> &gt; <a href="index.source.html" class="el_package">com.arrowsmith.minesweeper.model</a> &gt; <span class="el_source">MinesweeperTest.java</span></div><h1>MinesweeperTest.java</h1><pre class="source lang-java linenums">package com.arrowsmith.minesweeper.model;
+
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;
+<span class="fc" id="L7">class MinesweeperTest {</span>
+
+
+    @Test
+    @DisplayName(&quot;Generate grid makes grid not null&quot;)
+    void generateGridNotNull() {
+
+<span class="fc" id="L14">        Minesweeper ms = new Minesweeper();</span>
+
+<span class="fc" id="L16">        assertNull(ms.grid);</span>
+
+<span class="fc" id="L18">        ms.generateGrid();</span>
+
+<span class="fc" id="L20">        assertNotNull(ms.grid);</span>
+<span class="fc" id="L21">    }</span>
+
+    @Test
+    @DisplayName(&quot;Generate grid makes grid of correct size&quot;)
+    void generateGridOfCertainSize() {
+
+<span class="fc" id="L27">        Minesweeper ms = new Minesweeper();</span>
+
+<span class="fc" id="L29">        MinesweeperOptions options = new MinesweeperOptions();</span>
+
+<span class="fc" id="L31">        options.setNumberOfRows(5);</span>
+<span class="fc" id="L32">        options.setNumberOfColumns(11);</span>
+<span class="fc" id="L33">        options.setNumberOfMines(2);</span>
+
+<span class="fc" id="L35">        ms.setOptions(options);</span>
+
+<span class="fc" id="L37">        ms.generateGrid();</span>
+
+<span class="fc" id="L39">        assertEquals(5, ms.grid.rows);</span>
+<span class="fc" id="L40">        assertEquals(11, ms.grid.columns);</span>
+<span class="fc" id="L41">    }</span>
+
+    @Test
+    @DisplayName(&quot;Flag Square&quot;)
+    void flagSquare() {
+
+<span class="fc" id="L47">        final Minesweeper ms = new Minesweeper();</span>
+<span class="fc" id="L48">        ms.generateGrid();</span>
+
+<span class="fc" id="L50">        final Coordinate coordinate = new Coordinate(0, 0);</span>
+<span class="fc" id="L51">        final Square square = ms.grid.getSquareAtCoordinate(coordinate);</span>
+
+<span class="fc" id="L53">        final boolean flaggedBefore = square.isFlagged;</span>
+
+<span class="fc" id="L55">        ms.flagSquare(coordinate);</span>
+
+<span class="fc" id="L57">        final boolean flaggedAfter = square.isFlagged;</span>
+
+<span class="fc" id="L59">        assertFalse(flaggedBefore);</span>
+<span class="fc" id="L60">        assertTrue(flaggedAfter);</span>
+<span class="fc" id="L61">    }</span>
+
+    @Test
+    @DisplayName(&quot;Select Square reveals square&quot;)
+    void selectSquareRevealsSquare() {
+<span class="fc" id="L66">        final Minesweeper ms = new Minesweeper();</span>
+<span class="fc" id="L67">        ms.generateGrid();</span>
+
+<span class="fc" id="L69">        final Square square = ms.grid.getSquareAtCoordinate(new Coordinate(0, 0));</span>
+
+<span class="fc" id="L71">        final boolean isRevealedBefore = square.getIsRevealed();</span>
+
+<span class="fc" id="L73">        square.select();</span>
+
+<span class="fc" id="L75">        final boolean isRevealedAfter = square.getIsRevealed();</span>
+
+<span class="fc" id="L77">        assertFalse(isRevealedBefore);</span>
+<span class="fc" id="L78">        assertTrue(isRevealedAfter);</span>
+
+<span class="fc" id="L80">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.8.202204050719</span></div></body></html>
