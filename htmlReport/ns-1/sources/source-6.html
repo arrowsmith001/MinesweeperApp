@@ -1,0 +1,250 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > MinesweeperOptions</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.arrowsmith.minesweeper.model</a>
+</div>
+
+<h1>Coverage Summary for Class: MinesweeperOptions (com.arrowsmith.minesweeper.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MinesweeperOptions</td>
+<td class="coverageStat">
+  <span class="percent">
+    47.1%
+  </span>
+  <span class="absValue">
+    (8/17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    45.7%
+  </span>
+  <span class="absValue">
+    (21/46)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">MinesweeperOptions$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    50%
+  </span>
+  <span class="absValue">
+    (9/18)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    47.9%
+  </span>
+  <span class="absValue">
+    (23/48)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.arrowsmith.minesweeper.model;
+&nbsp;
+&nbsp;// TODO: Figure out fully flexible difficulty settings
+&nbsp;public class MinesweeperOptions {
+<b class="fc">&nbsp;    static int DEFAULT_ROW_COUNT = 5;</b>
+<b class="fc">&nbsp;    static int DEFAULT_COLUMN_COUNT = 10;</b>
+<b class="fc">&nbsp;    static int DEFAULT_MINE_COUNT = 12;</b>
+&nbsp;    public Difficulty difficulty;
+&nbsp;    public BoardSize boardSize;
+&nbsp;
+<b class="fc">&nbsp;    public MinesweeperOptions(){</b>
+<b class="fc">&nbsp;        setOptions(Difficulty.Medium, BoardSize.Medium);</b>
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public MinesweeperOptions(Difficulty difficulty, BoardSize boardSize) {</b>
+<b class="nc">&nbsp;        setOptions(difficulty, boardSize);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void setOptions(Difficulty difficulty, BoardSize boardSize) {
+<b class="fc">&nbsp;        this.difficulty = difficulty;</b>
+<b class="fc">&nbsp;        this.boardSize = boardSize;</b>
+&nbsp;
+<b class="fc">&nbsp;        setNumberOfRowsAndColumns(boardSize);</b>
+&nbsp;
+<b class="fc">&nbsp;        int numberOfSquares = numberOfColumns * numberOfRows;</b>
+&nbsp;
+<b class="fc">&nbsp;        setNumberOfMines(numberOfSquares, difficulty);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void setNumberOfMines(int numberOfSquares, Difficulty difficulty) {
+<b class="fc">&nbsp;        switch (difficulty)</b>
+&nbsp;        {
+&nbsp;            case Infantile -&gt; {
+<b class="nc">&nbsp;                numberOfMines = (int) (numberOfSquares * 0.05);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;            case Easy -&gt; {
+<b class="nc">&nbsp;                numberOfMines = (int) (numberOfSquares * 0.1);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;            case Medium -&gt; {
+<b class="fc">&nbsp;                numberOfMines = (int) (numberOfSquares * 0.2);</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;            case Hard -&gt; {
+<b class="nc">&nbsp;                numberOfMines = (int) (numberOfSquares * 0.3);</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;            case Impossible -&gt; {
+<b class="nc">&nbsp;                numberOfMines = (int) (numberOfSquares * 0.4);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+<b class="fc">&nbsp;        numberOfMines = Math.max(numberOfMines, 2);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void setNumberOfRowsAndColumns(BoardSize boardSize) {
+<b class="fc">&nbsp;        switch (boardSize)</b>
+&nbsp;        {
+&nbsp;            case Small -&gt; {
+<b class="nc">&nbsp;                this.numberOfRows = 5;</b>
+<b class="nc">&nbsp;                this.numberOfColumns = 10;</b>
+<b class="nc">&nbsp;            }</b>
+&nbsp;            case Medium -&gt; {
+<b class="fc">&nbsp;                this.numberOfRows = 8;</b>
+<b class="fc">&nbsp;                this.numberOfColumns = 12;</b>
+<b class="fc">&nbsp;            }</b>
+&nbsp;            case Large -&gt; {
+<b class="nc">&nbsp;                this.numberOfRows = 20;</b>
+<b class="nc">&nbsp;                this.numberOfColumns = 48;</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+<b class="nc">&nbsp;    public MinesweeperOptions(int numberOfRows, int numberOfColumns, int numberOfMines) {</b>
+<b class="nc">&nbsp;        this.numberOfRows = numberOfRows;</b>
+<b class="nc">&nbsp;        this.numberOfColumns = numberOfColumns;</b>
+<b class="nc">&nbsp;        this.numberOfMines = numberOfMines;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private int numberOfRows;
+&nbsp;    private int numberOfColumns;
+&nbsp;    private int numberOfMines;
+&nbsp;
+&nbsp;
+&nbsp;    public int getNumberOfRows() {
+<b class="fc">&nbsp;        return numberOfRows;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getNumberOfColumns() {
+<b class="fc">&nbsp;        return numberOfColumns;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public int getNumberOfMines() {
+<b class="fc">&nbsp;        return numberOfMines;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public void setNumberOfRows(int numberOfRows) {
+<b class="nc">&nbsp;        this.numberOfRows = numberOfRows;</b>
+&nbsp;    }
+&nbsp;    public void setNumberOfColumns(int numberOfColumns) {
+<b class="nc">&nbsp;        this.numberOfColumns = numberOfColumns;</b>
+&nbsp;    }
+&nbsp;    public void setNumberOfMines(int numberOfMines) {
+<b class="nc">&nbsp;        this.numberOfMines = numberOfMines;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public Difficulty getDifficulty() {
+<b class="nc">&nbsp;        return difficulty;</b>
+&nbsp;    }
+&nbsp;    public void setDifficulty(Difficulty difficulty) {
+<b class="nc">&nbsp;        this.difficulty = difficulty;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public BoardSize getBoardSize() {
+<b class="nc">&nbsp;        return boardSize;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void setBoardSize(BoardSize boardSize) {
+<b class="nc">&nbsp;        this.boardSize = boardSize;</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-22 16:02</div>
+</div>
+</body>
+</html>

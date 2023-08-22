@@ -1,0 +1,165 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Difficulty</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.arrowsmith.minesweeper.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Difficulty (com.arrowsmith.minesweeper.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Difficulty</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (2/2)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.arrowsmith.minesweeper.model;
+&nbsp;
+&nbsp;
+&nbsp;import java.util.Scanner;
+&nbsp;
+&nbsp;// TODO: Generate board after first input
+&nbsp;public class Minesweeper {
+&nbsp;
+&nbsp;    public Minesweeper() {}
+&nbsp;
+&nbsp;    public Grid grid;
+&nbsp;
+&nbsp;    private MinesweeperOptions options = new MinesweeperOptions();
+&nbsp;    public MinesweeperOptions getOptions() {
+&nbsp;        return options;
+&nbsp;    }
+&nbsp;    public void setOptions(MinesweeperOptions options){
+&nbsp;        this.options = options;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    public void generateGrid() {
+&nbsp;
+&nbsp;        grid = new Grid(options);
+&nbsp;    }
+&nbsp;
+&nbsp;    public void flagSquare(Coordinate coordinate)
+&nbsp;    {
+&nbsp;        grid.flagSquare(coordinate);
+&nbsp;    }
+&nbsp;    public void selectSquare(Coordinate coordinate)
+&nbsp;    {
+&nbsp;        grid.selectSquare(coordinate);
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean hasWon() {
+&nbsp;        for (int i = 0; i &lt; grid.rows; i++) {
+&nbsp;            for (int j = 0; j &lt; grid.columns; j++) {
+&nbsp;
+&nbsp;                final Square square = grid.getSquareAtCoordinate(new Coordinate(i, j));
+&nbsp;                if(!square.hasMine &amp;&amp; !square.isRevealed)
+&nbsp;                {
+&nbsp;                    return false;
+&nbsp;                }
+&nbsp;
+&nbsp;            }
+&nbsp;        }
+&nbsp;        return true;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;}
+&nbsp;
+<b class="fc">&nbsp;enum Difficulty {</b>
+<b class="fc">&nbsp;    Infantile, Easy, Medium, Hard, Impossible, Custom</b>
+&nbsp;}
+&nbsp;enum BoardSize {
+&nbsp;    Small, Medium, Large, Custom
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-22 16:02</div>
+</div>
+</body>
+</html>

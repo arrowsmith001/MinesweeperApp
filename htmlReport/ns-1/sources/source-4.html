@@ -1,0 +1,292 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Grid</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.arrowsmith.minesweeper.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Grid (com.arrowsmith.minesweeper.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Grid</td>
+<td class="coverageStat">
+  <span class="percent">
+    76.9%
+  </span>
+  <span class="absValue">
+    (10/13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    78%
+  </span>
+  <span class="absValue">
+    (39/50)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">Grid$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>Total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    78.6%
+  </span>
+  <span class="absValue">
+    (11/14)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    81.4%
+  </span>
+  <span class="absValue">
+    (48/59)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.arrowsmith.minesweeper.model;
+&nbsp;
+&nbsp;
+&nbsp;import com.arrowsmith.minesweeper.exceptions.MineUncoveredException;
+&nbsp;
+&nbsp;import java.util.*;
+&nbsp;import java.util.stream.IntStream;
+&nbsp;
+&nbsp;public class Grid
+&nbsp;{
+&nbsp;    public Grid(MinesweeperOptions options)
+<b class="fc">&nbsp;    {</b>
+&nbsp;
+<b class="fc">&nbsp;        rows = options.getNumberOfRows();</b>
+<b class="fc">&nbsp;        columns = options.getNumberOfColumns();</b>
+<b class="fc">&nbsp;        mines = options.getNumberOfMines();</b>
+&nbsp;
+<b class="fc">&nbsp;        generateBoard();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public final int rows;
+&nbsp;    public final int columns;
+&nbsp;    final int mines;
+&nbsp;
+&nbsp;    private Square[][] squaresArray;
+&nbsp;
+&nbsp;    public Square getSquareAtCoordinate(Coordinate coordinate)
+&nbsp;    {
+&nbsp;        try
+&nbsp;        {
+<b class="fc">&nbsp;            return squaresArray[coordinate.row][coordinate.column];</b>
+<b class="nc">&nbsp;        }catch(ArrayIndexOutOfBoundsException e)</b>
+&nbsp;        {
+<b class="nc">&nbsp;            return null;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private void generateBoard() {
+&nbsp;
+<b class="fc">&nbsp;        addSquares();</b>
+&nbsp;
+<b class="fc">&nbsp;        addMines();</b>
+&nbsp;
+<b class="fc">&nbsp;        addNeighborsToSquares();</b>
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    private void addSquares() {
+&nbsp;
+&nbsp;        // 2D Array - for instant querying
+<b class="fc">&nbsp;        squaresArray = new Square[rows][columns];</b>
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; rows; i++) {</b>
+&nbsp;
+<b class="fc">&nbsp;            final List&lt;Square&gt; rowList = new LinkedList&lt;&gt;();</b>
+&nbsp;
+<b class="fc">&nbsp;            for (int j = 0; j &lt; columns; j++)</b>
+&nbsp;            {
+<b class="fc">&nbsp;                final Coordinate coordinate = new Coordinate(i, j);</b>
+<b class="fc">&nbsp;                final Square square = new Square(coordinate);</b>
+&nbsp;
+<b class="fc">&nbsp;                squaresArray[i][j] = square;</b>
+<b class="fc">&nbsp;                rowList.add(square);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addNeighborsToSquares() {
+&nbsp;
+<b class="fc">&nbsp;        for (int i = 0; i &lt; rows; i++) {</b>
+<b class="fc">&nbsp;            for (int j = 0; j &lt; columns; j++) {</b>
+&nbsp;
+<b class="fc">&nbsp;                final Square square = getSquareAtCoordinate(new Coordinate(i, j));</b>
+<b class="fc">&nbsp;                addNeighbors(square);</b>
+&nbsp;            }
+&nbsp;        }
+&nbsp;
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addNeighbors(Square square)
+&nbsp;    {
+<b class="fc">&nbsp;        final Coordinate coordinate = square.coordinate;</b>
+<b class="fc">&nbsp;        final List&lt;Coordinate&gt; neighborCoordinates = new ArrayList&lt;&gt;()</b>
+<b class="fc">&nbsp;        {</b>
+&nbsp;            {
+<b class="fc">&nbsp;                add(new Coordinate(coordinate.row - 1, coordinate.column + 1));</b>
+<b class="fc">&nbsp;                add(new Coordinate(coordinate.row - 1, coordinate.column));</b>
+<b class="fc">&nbsp;                add(new Coordinate(coordinate.row - 1, coordinate.column - 1));</b>
+<b class="fc">&nbsp;                add(new Coordinate(coordinate.row, coordinate.column + 1));</b>
+<b class="fc">&nbsp;                add(new Coordinate(coordinate.row, coordinate.column - 1));</b>
+<b class="fc">&nbsp;                add(new Coordinate(coordinate.row + 1, coordinate.column + 1));</b>
+<b class="fc">&nbsp;                add(new Coordinate(coordinate.row + 1, coordinate.column));</b>
+<b class="fc">&nbsp;                add(new Coordinate(coordinate.row + 1, coordinate.column - 1));</b>
+&nbsp;            }
+&nbsp;        };
+&nbsp;
+<b class="fc">&nbsp;        neighborCoordinates.removeIf(c -&gt; !isValidCoordinate(c));</b>
+&nbsp;
+<b class="fc">&nbsp;        neighborCoordinates.forEach(c -&gt;</b>
+&nbsp;        {
+<b class="fc">&nbsp;            final Square neighbor = getSquareAtCoordinate(c);</b>
+<b class="fc">&nbsp;            if(neighbor != null) square.addNeighbor(neighbor);</b>
+&nbsp;        });
+&nbsp;    }
+&nbsp;
+&nbsp;    private boolean isValidCoordinate(Coordinate c) {
+<b class="fc">&nbsp;        final boolean isNonNegative = c.column &gt;= 0 &amp;&amp; c.row &gt;=0;</b>
+<b class="fc">&nbsp;        final boolean isInBounds = c.column &lt; columns &amp;&amp; c.row &lt; rows;</b>
+<b class="fc">&nbsp;        return isNonNegative &amp;&amp; isInBounds;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private Coordinate indexToCoordinate(int i) {
+<b class="fc">&nbsp;        return new Coordinate(i / columns, i % columns);</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    private void addMines()
+&nbsp;    {
+&nbsp;        // New array from 0 to end of grid
+<b class="fc">&nbsp;        final List&lt;Integer&gt; indexes = new ArrayList&lt;&gt;(IntStream.range(0, rows * columns).boxed().toList());</b>
+&nbsp;
+&nbsp;        // Get a random subset of these indices
+<b class="fc">&nbsp;        Collections.shuffle(indexes);</b>
+<b class="fc">&nbsp;        final Set&lt;Integer&gt; randomIndices = new HashSet&lt;Integer&gt;(indexes.subList(0, mines - 1));</b>
+&nbsp;
+&nbsp;        // Add mines at those indices
+<b class="fc">&nbsp;        for(int index : randomIndices)</b>
+&nbsp;        {
+<b class="fc">&nbsp;            final Coordinate coordinate = indexToCoordinate(index);</b>
+<b class="fc">&nbsp;            final Square square = getSquareAtCoordinate(coordinate);</b>
+&nbsp;
+<b class="fc">&nbsp;            square.setHasMine(true);</b>
+&nbsp;
+<b class="fc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public void selectSquare(Coordinate coordinate) {
+<b class="nc">&nbsp;        System.out.println(&quot;Selecting &quot; + coordinate);</b>
+<b class="nc">&nbsp;        final Square square = getSquareAtCoordinate(coordinate);</b>
+<b class="nc">&nbsp;        square.select();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void reset() {
+<b class="nc">&nbsp;        generateBoard();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void flagSquare(Coordinate coordinate) {
+&nbsp;
+<b class="nc">&nbsp;        System.out.println(&quot;Flagging &quot; + coordinate);</b>
+<b class="nc">&nbsp;        final Square square = getSquareAtCoordinate(coordinate);</b>
+<b class="nc">&nbsp;        if(square.getIsRevealed())</b>
+&nbsp;        {
+<b class="nc">&nbsp;            System.out.println(&quot;Cannot flag a revealed square&quot;);</b>
+&nbsp;        }
+<b class="nc">&nbsp;        else square.toggleFlagged();</b>
+&nbsp;    }
+&nbsp;}
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-22 16:02</div>
+</div>
+</body>
+</html>

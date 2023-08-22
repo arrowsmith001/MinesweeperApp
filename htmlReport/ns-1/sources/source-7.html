@@ -1,0 +1,217 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > Square</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.arrowsmith.minesweeper.model</a>
+</div>
+
+<h1>Coverage Summary for Class: Square (com.arrowsmith.minesweeper.model)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">Square</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    40%
+  </span>
+  <span class="absValue">
+    (4/10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    33.3%
+  </span>
+  <span class="absValue">
+    (10/30)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.arrowsmith.minesweeper.model;
+&nbsp;
+&nbsp;import com.arrowsmith.minesweeper.exceptions.MineUncoveredException;
+&nbsp;import com.arrowsmith.minesweeperapp.SquareState;
+&nbsp;
+&nbsp;import java.util.LinkedList;
+&nbsp;import java.util.List;
+&nbsp;
+&nbsp;public class Square
+&nbsp;{
+&nbsp;
+&nbsp;    public SquareState getState() {
+<b class="fc">&nbsp;        if(!isRevealed)</b>
+&nbsp;        {
+<b class="fc">&nbsp;            if(isFlagged)</b>
+&nbsp;            {
+<b class="nc">&nbsp;                return SquareState.flagged;</b>
+&nbsp;            }
+&nbsp;            else
+&nbsp;            {
+<b class="fc">&nbsp;                return SquareState.hidden;</b>
+&nbsp;            }
+&nbsp;        }
+<b class="nc">&nbsp;        else if(hasMine)</b>
+&nbsp;        {
+<b class="nc">&nbsp;            return SquareState.mined;</b>
+&nbsp;        }
+&nbsp;        else
+&nbsp;        {
+<b class="nc">&nbsp;            final int neighborCount = getNeighborMineCount();</b>
+<b class="nc">&nbsp;            if(neighborCount &gt; 0)</b>
+&nbsp;            {
+<b class="nc">&nbsp;                return SquareState.numbered;</b>
+&nbsp;            }
+<b class="nc">&nbsp;            else return SquareState.empty;</b>
+&nbsp;        }
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean setIsFlagged;
+&nbsp;
+<b class="fc">&nbsp;    public Square(Coordinate coordinate) {</b>
+<b class="fc">&nbsp;        this.coordinate = coordinate;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    final Coordinate coordinate;
+&nbsp;
+<b class="fc">&nbsp;    final List&lt;Square&gt; neighbors = new LinkedList&lt;Square&gt;();</b>
+&nbsp;
+&nbsp;    public void addNeighbor(Square squareToAdd) {
+<b class="fc">&nbsp;        neighbors.add(squareToAdd);</b>
+<b class="fc">&nbsp;        if(squareToAdd.hasMine) neighborMineCount++;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public boolean hasMine;
+&nbsp;    public boolean isFlagged;
+&nbsp;    public boolean isRevealed;
+&nbsp;
+&nbsp;    public void setHasMine(boolean hasMine) {
+<b class="fc">&nbsp;        this.hasMine = hasMine;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean getHasMine() {
+<b class="nc">&nbsp;        return hasMine;</b>
+&nbsp;    }
+<b class="fc">&nbsp;    private int neighborMineCount = 0;</b>
+&nbsp;
+&nbsp;    public int getNeighborMineCount() {
+<b class="nc">&nbsp;        return neighborMineCount;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void select() {
+&nbsp;
+&nbsp;        // Any selected square will reveal itself
+<b class="nc">&nbsp;        isRevealed = true;</b>
+&nbsp;
+&nbsp;        // If this square has a mine, the game ends
+<b class="nc">&nbsp;        if(hasMine)</b>
+&nbsp;        {
+<b class="nc">&nbsp;            System.out.println(&quot;You lose!&quot;);</b>
+&nbsp;            return;
+&nbsp;        }
+&nbsp;
+&nbsp;        // If this square has any neighboring mines, selection process stops
+<b class="nc">&nbsp;        if(hasNeighboringMines()) return;</b>
+&nbsp;
+&nbsp;        // For all neighbors, select them if:
+&nbsp;        //      - They have no mine
+&nbsp;        //      - They aren&#39;t already revealed - this prevents infinite loops
+<b class="nc">&nbsp;        for (Square neighbor : neighbors)</b>
+&nbsp;        {
+<b class="nc">&nbsp;            if(!neighbor.hasMine &amp;&amp; !neighbor.isRevealed)</b>
+&nbsp;            {
+<b class="nc">&nbsp;                neighbor.select();</b>
+&nbsp;            }
+<b class="nc">&nbsp;        }</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;
+&nbsp;    protected boolean hasNeighboringMines() {
+<b class="nc">&nbsp;        return getNeighborMineCount() &gt; 0;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public void toggleFlagged() {
+<b class="nc">&nbsp;        isFlagged = !isFlagged;</b>
+&nbsp;    }
+&nbsp;
+&nbsp;    public boolean getIsRevealed() {
+<b class="nc">&nbsp;        return isRevealed;</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-22 16:02</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,152 @@
+
+
+
+<!DOCTYPE html>
+<html id="htmlId">
+<head>
+  <meta http-equiv="Content-Type" content="text/html;charset=windows-1252"> 
+  <title>Coverage Report > MinesweeperApplication</title>
+  <style type="text/css">
+    @import "../../css/coverage.css";
+    @import "../../css/idea.min.css";
+  </style>
+  <script type="text/javascript" src="../../js/highlight.min.js"></script>
+  <script type="text/javascript" src="../../js/highlightjs-line-numbers.min.js"></script>
+</head>
+
+<body>
+<div class="content">
+<div class="breadCrumbs">
+Current scope:     <a href="../../index.html">all classes</a>
+    <span class="separator">|</span>
+    <a href="../index.html">com.arrowsmith.minesweeperapp</a>
+</div>
+
+<h1>Coverage Summary for Class: MinesweeperApplication (com.arrowsmith.minesweeperapp)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">MinesweeperApplication</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (1/1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (3/3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    100%
+  </span>
+  <span class="absValue">
+    (9/9)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<pre>
+<code class="sourceCode" id="sourceCode">&nbsp;package com.arrowsmith.minesweeperapp;
+&nbsp;
+&nbsp;import com.arrowsmith.minesweeper.exceptions.MineUncoveredException;
+&nbsp;import com.arrowsmith.minesweeper.model.*;
+&nbsp;import javafx.application.Application;
+&nbsp;import javafx.beans.property.ObjectProperty;
+&nbsp;import javafx.beans.property.SimpleObjectProperty;
+&nbsp;import javafx.beans.property.SimpleStringProperty;
+&nbsp;import javafx.beans.property.StringProperty;
+&nbsp;import javafx.fxml.FXMLLoader;
+&nbsp;import javafx.scene.Node;
+&nbsp;import javafx.scene.Scene;
+&nbsp;import javafx.scene.input.MouseEvent;
+&nbsp;import javafx.scene.layout.GridPane;
+&nbsp;import javafx.scene.layout.TilePane;
+&nbsp;import javafx.scene.text.Text;
+&nbsp;import javafx.stage.Stage;
+&nbsp;
+&nbsp;import java.io.ByteArrayInputStream;
+&nbsp;import java.io.IOException;
+&nbsp;import java.io.InputStream;
+&nbsp;import java.util.Scanner;
+&nbsp;
+&nbsp;// TODO: Databind
+&nbsp;
+<b class="fc">&nbsp;public class MinesweeperApplication extends Application {</b>
+&nbsp;
+&nbsp;    @Override
+&nbsp;    public void start(Stage stage) throws IOException {
+&nbsp;
+<b class="fc">&nbsp;        FXMLLoader fxmlLoader = new FXMLLoader(MinesweeperApplication.class.getResource(&quot;hello-view.fxml&quot;));</b>
+<b class="fc">&nbsp;        Scene scene = new Scene(fxmlLoader.load(), 1500, 750);</b>
+&nbsp;
+<b class="fc">&nbsp;        stage.setTitle(&quot;Minesweeper&quot;);</b>
+<b class="fc">&nbsp;        stage.setScene(scene);</b>
+&nbsp;
+<b class="fc">&nbsp;        MinesweeperController c = fxmlLoader.getController();</b>
+<b class="fc">&nbsp;        c.start();</b>
+&nbsp;
+<b class="fc">&nbsp;        stage.show();</b>
+&nbsp;    }
+&nbsp;
+&nbsp;
+&nbsp;    public static void main(String[] args) {
+<b class="fc">&nbsp;        launch();</b>
+&nbsp;    }
+&nbsp;}
+&nbsp;
+</code>
+</pre>
+</div>
+
+<script type="text/javascript">
+(function() {
+    var msie = false, msie9 = false;
+    /*@cc_on
+      msie = true;
+      @if (@_jscript_version >= 9)
+        msie9 = true;
+      @end
+    @*/
+
+    if (!msie || msie && msie9) {
+      hljs.highlightAll()
+      hljs.initLineNumbersOnLoad();
+    }
+})();
+</script>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2023-08-22 16:02</div>
+</div>
+</body>
+</html>

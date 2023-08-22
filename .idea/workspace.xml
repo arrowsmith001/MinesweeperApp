@@ -12,6 +12,12 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
+  <component name="CoverageOptionsProvider">
+    <option name="myAddOrReplace" value="1" />
+  </component>
+  <component name="ExportToHTMLSettings">
+    <option name="OUTPUT_DIRECTORY" value="D:\Documents\TSI\Projects\MinesweeperApp\htmlReport" />
+  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -59,7 +65,7 @@
       <recent name="com.arrowsmith.minesweeper.model" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Unnamed">
+  <component name="RunManager" selected="JUnit.MinesweeperTest.generateGrid">
     <configuration name="Unnamed" type="Application" factoryName="Application" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.arrowsmith.minesweeperapp.MinesweeperApplication" />
       <module name="MinesweeperApp" />
@@ -102,5 +108,8 @@
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/MinesweeperApp$Unnamed.ic" NAME="Unnamed Coverage Results" MODIFIED="1692715993418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
+    <SUITE FILE_PATH="coverage/MinesweeperApp$MinesweeperTest_generateGrid.ic" NAME="MinesweeperTest.generateGrid Coverage Results" MODIFIED="1692716440476" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.arrowsmith.minesweeper.model.*</FILTER>
+    </SUITE>
   </component>
 </project>
