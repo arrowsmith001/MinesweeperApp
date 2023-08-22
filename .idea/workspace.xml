@@ -5,7 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="a5c7843d-6d1b-4b09-9283-4a0da12b249f" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/arrowsmith/minesweeper/model/MinesweeperOptionsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/arrowsmith/minesweeper/model/MinesweeperOptionsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -99,5 +99,8 @@
       <updated>1692621043186</updated>
     </task>
     <servers />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/MinesweeperApp$Unnamed.ic" NAME="Unnamed Coverage Results" MODIFIED="1692715993418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>
