@@ -9,7 +9,7 @@ public class MinesweeperOptions {
     public BoardSize boardSize;
 
     public MinesweeperOptions(){
-        setOptions(Difficulty.Medium, BoardSize.Medium);
+        setOptions(Difficulty.Easy, BoardSize.Medium);
     }
 
     public MinesweeperOptions(Difficulty difficulty, BoardSize boardSize) {

@@ -127,7 +127,7 @@ public class Grid
         Collections.shuffle(indexes);
         final Set<Integer> randomIndices = new HashSet<Integer>(indexes.subList(0, mines - 1));
 
-        // Add mines at those indices
+
         for(int index : randomIndices)
         {
             final Coordinate coordinate = indexToCoordinate(index);
@@ -139,9 +139,11 @@ public class Grid
     }
 
 
+
     public void selectSquare(Coordinate coordinate) {
-        System.out.println("Selecting " + coordinate);
+
         final Square square = getSquareAtCoordinate(coordinate);
+
         square.select();
     }
 
@@ -158,5 +160,20 @@ public class Grid
             System.out.println("Cannot flag a revealed square");
         }
         else square.toggleFlagged();
+    }
+
+    public void revealAllMines() {
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < columns; j++)
+            {
+                final Coordinate coordinate = new Coordinate(i, j);
+                final Square square = getSquareAtCoordinate(coordinate);
+
+                if(square.hasMine)
+                {
+                    square.setRevealed(true);
+                }
+            }
+        }
     }
 }

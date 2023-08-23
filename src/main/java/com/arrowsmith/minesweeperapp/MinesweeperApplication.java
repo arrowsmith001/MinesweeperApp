@@ -28,7 +28,7 @@ public class MinesweeperApplication extends Application {
     @Override
     public void start(Stage stage) throws IOException {
 
-        FXMLLoader fxmlLoader = new FXMLLoader(MinesweeperApplication.class.getResource("hello-view.fxml"));
+        FXMLLoader fxmlLoader = new FXMLLoader(MinesweeperApplication.class.getResource("main-view.fxml"));
         Scene scene = new Scene(fxmlLoader.load(), 1500, 750);
 
         stage.setTitle("Minesweeper");

@@ -69,7 +69,13 @@ public class Square
         return neighborMineCount;
     }
 
-    public void select() {
+    public void select()  {
+
+        // If this square is flagged, ignore
+        if(isFlagged)
+        {
+            return;
+        }
 
         // Any selected square will reveal itself
         isRevealed = true;
@@ -77,7 +83,6 @@ public class Square
         // If this square has a mine, the game ends
         if(hasMine)
         {
-            System.out.println("You lose!");
             return;
         }
 
@@ -108,6 +113,10 @@ public class Square
 
     public boolean getIsRevealed() {
         return isRevealed;
+    }
+
+    public void setRevealed(boolean isRevealed) {
+        this.isRevealed = isRevealed;
     }
 }
 
