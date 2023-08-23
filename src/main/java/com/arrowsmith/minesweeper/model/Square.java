@@ -20,7 +20,7 @@ public class Square
                 return SquareState.HIDDEN;
             }
         }
-        else if(hasMine)
+        else if(isMined)
         {
             return SquareState.MINED;
         }
@@ -43,24 +43,31 @@ public class Square
 
     final Coordinate coordinate;
 
-    final List<Square> neighbors = new LinkedList<Square>();
+    final List<Square> neighbors = new LinkedList<>();
 
     public void addNeighbor(Square squareToAdd) {
         neighbors.add(squareToAdd);
-        if(squareToAdd.hasMine) neighborMineCount++;
+        if(squareToAdd.isMined) neighborMineCount++;
     }
 
 
-    public boolean hasMine;
-    public boolean isFlagged;
-    public boolean isRevealed;
 
-    public void setHasMine(boolean hasMine) {
-        this.hasMine = hasMine;
+    public boolean isFlagged() {
+        return isFlagged;
     }
 
-    public boolean getHasMine() {
-        return hasMine;
+    private boolean isMined;
+
+    private boolean isFlagged;
+    private boolean isRevealed;
+
+
+    public void setMined(boolean mined) {
+        this.isMined = mined;
+    }
+
+    public boolean isMined() {
+        return isMined;
     }
     private int neighborMineCount = 0;
 
@@ -80,7 +87,7 @@ public class Square
         isRevealed = true;
 
         // If this square has a mine, the game ends
-        if(hasMine)
+        if(isMined)
         {
             return;
         }
@@ -93,7 +100,7 @@ public class Square
         //      - They aren't already revealed - this prevents infinite loops
         for (Square neighbor : neighbors)
         {
-            if(!neighbor.hasMine && !neighbor.isRevealed)
+            if(!neighbor.isMined && !neighbor.isRevealed)
             {
                 neighbor.select();
             }
@@ -110,7 +117,7 @@ public class Square
         isFlagged = !isFlagged;
     }
 
-    public boolean getIsRevealed() {
+    public boolean isRevealed() {
         return isRevealed;
     }
 

@@ -7,18 +7,6 @@ import static org.junit.jupiter.api.Assertions.*;
 class MinesweeperTest {
 
 
-    @Test
-    @DisplayName("Generate grid makes grid not null")
-    void generateGridNotNull() {
-
-        Minesweeper ms = new Minesweeper();
-
-        assertNull(ms.grid);
-
-        ms.generateGrid();
-
-        assertNotNull(ms.grid);
-    }
 
     @Test
     @DisplayName("Generate grid makes grid of correct size")
@@ -36,8 +24,8 @@ class MinesweeperTest {
 
         ms.generateGrid();
 
-        assertEquals(5, ms.grid.rows);
-        assertEquals(11, ms.grid.columns);
+        assertEquals(5, ms.getGridRowCount());
+        assertEquals(11, ms.getGridColumnCount());
     }
 
     @Test
@@ -48,13 +36,13 @@ class MinesweeperTest {
         ms.generateGrid();
 
         final Coordinate coordinate = new Coordinate(0, 0);
-        final Square square = ms.grid.getSquareAtCoordinate(coordinate);
+        final Square square = ms.getSquareAtCoordinate(coordinate);
 
-        final boolean flaggedBefore = square.isFlagged;
+        final boolean flaggedBefore = square.isFlagged();
 
         ms.flagSquare(coordinate);
 
-        final boolean flaggedAfter = square.isFlagged;
+        final boolean flaggedAfter = square.isFlagged();
 
         assertFalse(flaggedBefore);
         assertTrue(flaggedAfter);
@@ -66,13 +54,13 @@ class MinesweeperTest {
         final Minesweeper ms = new Minesweeper();
         ms.generateGrid();
 
-        final Square square = ms.grid.getSquareAtCoordinate(new Coordinate(0, 0));
+        final Square square = ms.getSquareAtCoordinate(new Coordinate(0, 0));
 
-        final boolean isRevealedBefore = square.getIsRevealed();
+        final boolean isRevealedBefore = square.isRevealed();
 
         square.select();
 
-        final boolean isRevealedAfter = square.getIsRevealed();
+        final boolean isRevealedAfter = square.isRevealed();
 
         assertFalse(isRevealedBefore);
         assertTrue(isRevealedAfter);

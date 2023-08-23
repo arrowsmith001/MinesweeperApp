@@ -6,14 +6,20 @@
   <component name="ChangeListManager">
     <list default="true" id="a5c7843d-6d1b-4b09-9283-4a0da12b249f" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/htmlReport/ns-2/sources/source-4.html" beforeDir="false" afterPath="$PROJECT_DIR$/htmlReport/ns-2/sources/source-4.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeper/model/Coordinate.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeper/model/Coordinate.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeper/model/Grid.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeper/model/Grid.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeper/model/Minesweeper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeper/model/Minesweeper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeper/model/MinesweeperOptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeper/model/MinesweeperOptions.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeper/model/Square.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeper/model/Square.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeper/model/WinState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeper/model/WinState.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeperapp/MinesweeperApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeperapp/MinesweeperApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeperapp/MinesweeperController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeperapp/MinesweeperController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeperapp/SquareState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/arrowsmith/minesweeperapp/SquareState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/com/arrowsmith/minesweeper/model/MinesweeperOptionsTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/arrowsmith/minesweeper/model/MinesweeperOptionsTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/com/arrowsmith/minesweeperapp/main-view.fxml" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/com/arrowsmith/minesweeperapp/main-view.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/arrowsmith/minesweeper/model/MinesweeperTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/com/arrowsmith/minesweeper/model/MinesweeperTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/arrowsmith/minesweeperapp/MinesweeperApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/arrowsmith/minesweeperapp/MinesweeperApplication.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/com/arrowsmith/minesweeperapp/MinesweeperController.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/com/arrowsmith/minesweeperapp/MinesweeperController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/module-info.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/module-info.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

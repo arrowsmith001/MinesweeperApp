@@ -18,10 +18,14 @@ import javafx.scene.text.Text;
 
 public class MinesweeperController {
 
-    final double d = 45.0;
-    public GridPane gridPane;
-    public Text infoText;
-    public Button playButton;
+    final static double d = 45.0;
+
+    @FXML
+    protected GridPane gridPane;
+    @FXML
+    protected Text infoText;
+    @FXML
+    protected Button playButton;
 
     @FXML
     SquareViewModel[][] vms;
@@ -40,16 +44,17 @@ public class MinesweeperController {
 
         ms.generateGrid();
 
-        final Grid grid = ms.grid;
-
         setRowConstraints();
 
-        vms = new SquareViewModel[grid.rows][grid.columns];
+        final int rowCount = ms.getGridRowCount();
+        final int columnCount = ms.getGridColumnCount();
 
-        for (int i = 0; i < grid.rows; i++) {
-            for (int j = 0; j < grid.columns; j++) {
+        vms = new SquareViewModel[rowCount][columnCount];
 
-                final Square square = grid.getSquareAtCoordinate(new Coordinate(i, j));
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < columnCount; j++) {
+
+                final Square square = ms.getSquareAtCoordinate(new Coordinate(i, j));
                 final SquareViewModel vm = new SquareViewModel(square);
 
                 final Node squareView = vm.getView(d);
@@ -60,7 +65,7 @@ public class MinesweeperController {
             }
         }
 
-
+        gridPane.setCenterShape(true);
         gridIsClickable = true;
     }
 
@@ -69,10 +74,10 @@ public class MinesweeperController {
         gridPane.getRowConstraints().clear();
         gridPane.getColumnConstraints().clear();
 
-        for (int i = 0; i < ms.grid.columns; i++) {
+        for (int i = 0; i < ms.getGridRowCount(); i++) {
             gridPane.getRowConstraints().add(new RowConstraints(d));
         }
-        for (int j = 0; j < ms.grid.rows; j++) {
+        for (int j = 0; j < ms.getGridColumnCount(); j++) {
             gridPane.getColumnConstraints().add(new ColumnConstraints(d));
         }
     }
@@ -90,7 +95,7 @@ public class MinesweeperController {
         int column = GridPane.getRowIndex(node);
         int row = GridPane.getColumnIndex(node);
 
-        final Square square = ms.grid.getSquareAtCoordinate(new Coordinate(row, column));
+        final Square square = ms.getSquareAtCoordinate(new Coordinate(row, column));
 
         if(square != null)
         {
@@ -126,13 +131,13 @@ public class MinesweeperController {
 
     private void onGameLost() {
         gridIsClickable = false;
-        ms.grid.revealAllMines();
+        ms.revealAllMines();
         infoText.setText("You lose!");
     }
 
     private void updateGridLabels() {
-        for (int i = 0; i < ms.grid.rows; i++) {
-            for (int j = 0; j < ms.grid.columns; j++) {
+        for (int i = 0; i < ms.getGridRowCount(); i++) {
+            for (int j = 0; j < ms.getGridColumnCount(); j++) {
                 vms[i][j].updateLabel();
             }
         }

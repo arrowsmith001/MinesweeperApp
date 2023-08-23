@@ -4,7 +4,7 @@ package com.arrowsmith.minesweeper.model;
 // TODO: Generate board after first input
 public class Minesweeper {
 
-    public Grid grid;
+    private Grid grid;
 
     private MinesweeperOptions options = new MinesweeperOptions();
     public MinesweeperOptions getOptions() {
@@ -14,6 +14,12 @@ public class Minesweeper {
         this.options = options;
     }
 
+    public int getGridRowCount(){
+        return grid.rowCount;
+    }
+    public int getGridColumnCount(){
+        return grid.columnCount;
+    }
 
     public void generateGrid() {
 
@@ -33,17 +39,17 @@ public class Minesweeper {
 
         boolean thereExistUnrevealedSafeSquares = false;
 
-        for (int i = 0; i < grid.rows; i++) {
-            for (int j = 0; j < grid.columns; j++) {
+        for (int i = 0; i < grid.rowCount; i++) {
+            for (int j = 0; j < grid.columnCount; j++) {
 
                 final Square square = grid.getSquareAtCoordinate(new Coordinate(i, j));
 
-                if(square.hasMine && square.isRevealed)
+                if(square.isMined() && square.isRevealed())
                 {
                     return WinState.LOST;
                 }
 
-                if(!square.hasMine && !square.isRevealed)
+                if(!square.isMined() && !square.isRevealed())
                 {
                     thereExistUnrevealedSafeSquares = true;
                 }
@@ -52,6 +58,13 @@ public class Minesweeper {
         return thereExistUnrevealedSafeSquares ? WinState.PLAYING : WinState.WON;
     }
 
+    public Square getSquareAtCoordinate(Coordinate coordinate) {
+        return grid.getSquareAtCoordinate(coordinate);
+    }
+
+    public void revealAllMines() {
+        grid.revealAllMines();
+    }
 }
 
 enum Difficulty {

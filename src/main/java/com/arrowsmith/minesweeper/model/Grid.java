@@ -1,26 +1,27 @@
 package com.arrowsmith.minesweeper.model;
 
-
-import com.arrowsmith.minesweeper.exceptions.MineUncoveredException;
-
 import java.util.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import java.util.stream.IntStream;
 
 public class Grid
 {
+    static Logger logger = Logger.getLogger(Grid.class.getName());
+
     public Grid(MinesweeperOptions options)
     {
 
-        rows = options.getNumberOfRows();
-        columns = options.getNumberOfColumns();
+        rowCount = options.getNumberOfRows();
+        columnCount = options.getNumberOfColumns();
         mines = options.getNumberOfMines();
 
         generateBoard();
     }
 
 
-    public final int rows;
-    public final int columns;
+    public final int rowCount;
+    public final int columnCount;
     final int mines;
 
     private Square[][] squaresArray;
@@ -29,7 +30,7 @@ public class Grid
     {
         try
         {
-            return squaresArray[coordinate.row][coordinate.column];
+            return squaresArray[coordinate.getRow()][coordinate.getColumn()];
         }catch(ArrayIndexOutOfBoundsException e)
         {
             return null;
@@ -51,13 +52,13 @@ public class Grid
     private void addSquares() {
 
         // 2D Array - for instant querying
-        squaresArray = new Square[rows][columns];
+        squaresArray = new Square[rowCount][columnCount];
 
-        for (int i = 0; i < rows; i++) {
+        for (int i = 0; i < rowCount; i++) {
 
             final List<Square> rowList = new LinkedList<>();
 
-            for (int j = 0; j < columns; j++)
+            for (int j = 0; j < columnCount; j++)
             {
                 final Coordinate coordinate = new Coordinate(i, j);
                 final Square square = new Square(coordinate);
@@ -72,8 +73,8 @@ public class Grid
 
     private void addNeighborsToSquares() {
 
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++) {
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < columnCount; j++) {
 
                 final Square square = getSquareAtCoordinate(new Coordinate(i, j));
                 addNeighbors(square);
@@ -87,14 +88,14 @@ public class Grid
         final Coordinate coordinate = square.coordinate;
         final List<Coordinate> neighborCoordinates = new ArrayList<>();
 
-        neighborCoordinates.add(new Coordinate(coordinate.row - 1, coordinate.column + 1));
-        neighborCoordinates.add(new Coordinate(coordinate.row - 1, coordinate.column));
-        neighborCoordinates.add(new Coordinate(coordinate.row - 1, coordinate.column - 1));
-        neighborCoordinates.add(new Coordinate(coordinate.row, coordinate.column + 1));
-        neighborCoordinates.add(new Coordinate(coordinate.row, coordinate.column - 1));
-        neighborCoordinates.add(new Coordinate(coordinate.row + 1, coordinate.column + 1));
-        neighborCoordinates.add(new Coordinate(coordinate.row + 1, coordinate.column));
-        neighborCoordinates.add(new Coordinate(coordinate.row + 1, coordinate.column - 1));
+        neighborCoordinates.add(new Coordinate(coordinate.getRow() - 1, coordinate.getColumn() + 1));
+        neighborCoordinates.add(new Coordinate(coordinate.getRow() - 1, coordinate.getColumn()));
+        neighborCoordinates.add(new Coordinate(coordinate.getRow() - 1, coordinate.getColumn() - 1));
+        neighborCoordinates.add(new Coordinate(coordinate.getRow(), coordinate.getColumn() + 1));
+        neighborCoordinates.add(new Coordinate(coordinate.getRow(), coordinate.getColumn() - 1));
+        neighborCoordinates.add(new Coordinate(coordinate.getRow() + 1, coordinate.getColumn() + 1));
+        neighborCoordinates.add(new Coordinate(coordinate.getRow() + 1, coordinate.getColumn()));
+        neighborCoordinates.add(new Coordinate(coordinate.getRow() + 1, coordinate.getColumn() - 1));
 
         neighborCoordinates.removeIf(c -> !isValidCoordinate(c));
 
@@ -106,23 +107,23 @@ public class Grid
     }
 
     private boolean isValidCoordinate(Coordinate c) {
-        final boolean isNonNegative = c.column >= 0 && c.row >=0;
-        final boolean isInBounds = c.column < columns && c.row < rows;
+        final boolean isNonNegative = c.getColumn() >= 0 && c.getRow() >=0;
+        final boolean isInBounds = c.getColumn() < columnCount && c.getRow() < rowCount;
         return isNonNegative && isInBounds;
     }
 
     private Coordinate indexToCoordinate(int i) {
-        return new Coordinate(i / columns, i % columns);
+        return new Coordinate(i / columnCount, i % columnCount);
     }
 
     private void addMines()
     {
         // New array from 0 to end of grid
-        final List<Integer> indexes = new ArrayList<>(IntStream.range(0, rows * columns).boxed().toList());
+        final List<Integer> indexes = new ArrayList<>(IntStream.range(0, rowCount * columnCount).boxed().toList());
 
         // Get a random subset of these indices
         Collections.shuffle(indexes);
-        final Set<Integer> randomIndices = new HashSet<Integer>(indexes.subList(0, mines - 1));
+        final Set<Integer> randomIndices = new HashSet<>(indexes.subList(0, mines - 1));
 
 
         for(int index : randomIndices)
@@ -130,7 +131,7 @@ public class Grid
             final Coordinate coordinate = indexToCoordinate(index);
             final Square square = getSquareAtCoordinate(coordinate);
 
-            square.setHasMine(true);
+            square.setMined(true);
 
         }
     }
@@ -150,23 +151,23 @@ public class Grid
 
     public void flagSquare(Coordinate coordinate) {
 
-        System.out.println("Flagging " + coordinate);
+        logger.log(Level.INFO,"Flagging " + coordinate);
         final Square square = getSquareAtCoordinate(coordinate);
-        if(square.getIsRevealed())
+        if(square.isRevealed())
         {
-            System.out.println("Cannot flag a revealed square");
+            logger.log(Level.INFO,"Cannot flag a revealed square");
         }
         else square.toggleFlagged();
     }
 
     public void revealAllMines() {
-        for (int i = 0; i < rows; i++) {
-            for (int j = 0; j < columns; j++)
+        for (int i = 0; i < rowCount; i++) {
+            for (int j = 0; j < columnCount; j++)
             {
                 final Coordinate coordinate = new Coordinate(i, j);
                 final Square square = getSquareAtCoordinate(coordinate);
 
-                if(square.hasMine)
+                if(square.isMined())
                 {
                     square.setRevealed(true);
                 }
