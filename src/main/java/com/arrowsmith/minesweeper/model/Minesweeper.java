@@ -1,14 +1,8 @@
 package com.arrowsmith.minesweeper.model;
 
 
-import com.arrowsmith.minesweeper.exceptions.MineUncoveredException;
-
-import java.util.Scanner;
-
 // TODO: Generate board after first input
 public class Minesweeper {
-
-    public Minesweeper() {}
 
     public Grid grid;
 
@@ -19,7 +13,6 @@ public class Minesweeper {
     public void setOptions(MinesweeperOptions options){
         this.options = options;
     }
-
 
 
     public void generateGrid() {
@@ -47,7 +40,7 @@ public class Minesweeper {
 
                 if(square.hasMine && square.isRevealed)
                 {
-                    return WinState.lost;
+                    return WinState.LOST;
                 }
 
                 if(!square.hasMine && !square.isRevealed)
@@ -56,15 +49,15 @@ public class Minesweeper {
                 }
             }
         }
-        return thereExistUnrevealedSafeSquares ? WinState.playing : WinState.won;
+        return thereExistUnrevealedSafeSquares ? WinState.PLAYING : WinState.WON;
     }
 
 }
 
 enum Difficulty {
-    Infantile, Easy, Medium, Hard, Impossible, Custom
+    INFANTILE, EASY, MEDIUM, HARD, IMPOSSIBLE, CUSTOM
 }
 enum BoardSize {
-    Small, Medium, Large, Custom
+    SMALL, MEDIUM, LARGE, CUSTOM
 }
 

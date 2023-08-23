@@ -9,7 +9,7 @@ public class MinesweeperOptions {
     public BoardSize boardSize;
 
     public MinesweeperOptions(){
-        setOptions(Difficulty.Easy, BoardSize.Medium);
+        setOptions(Difficulty.EASY, BoardSize.MEDIUM);
     }
 
     public MinesweeperOptions(Difficulty difficulty, BoardSize boardSize) {
@@ -30,20 +30,23 @@ public class MinesweeperOptions {
     private void setNumberOfMines(int numberOfSquares, Difficulty difficulty) {
         switch (difficulty)
         {
-            case Infantile -> {
+            case INFANTILE -> {
                 numberOfMines = (int) (numberOfSquares * 0.05);
             }
-            case Easy -> {
+            case EASY -> {
                 numberOfMines = (int) (numberOfSquares * 0.1);
             }
-            case Medium -> {
+            case MEDIUM -> {
                 numberOfMines = (int) (numberOfSquares * 0.2);
             }
-            case Hard -> {
+            case HARD -> {
                 numberOfMines = (int) (numberOfSquares * 0.3);
             }
-            case Impossible -> {
+            case IMPOSSIBLE -> {
                 numberOfMines = (int) (numberOfSquares * 0.4);
+            }
+            default -> {
+                numberOfMines = 1; // TODO: Create mineDensity field and have this reference it
             }
         }
 
@@ -53,17 +56,21 @@ public class MinesweeperOptions {
     private void setNumberOfRowsAndColumns(BoardSize boardSize) {
         switch (boardSize)
         {
-            case Small -> {
+            case SMALL -> {
                 this.numberOfRows = 5;
                 this.numberOfColumns = 10;
             }
-            case Medium -> {
+            case MEDIUM -> {
                 this.numberOfRows = 8;
                 this.numberOfColumns = 12;
             }
-            case Large -> {
+            case LARGE -> {
                 this.numberOfRows = 20;
                 this.numberOfColumns = 48;
+            }
+            default -> {
+                this.numberOfRows = DEFAULT_ROW_COUNT;
+                this.numberOfColumns = DEFAULT_COLUMN_COUNT;
             }
         }
 

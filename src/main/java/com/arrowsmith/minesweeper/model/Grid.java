@@ -85,19 +85,16 @@ public class Grid
     private void addNeighbors(Square square)
     {
         final Coordinate coordinate = square.coordinate;
-        final List<Coordinate> neighborCoordinates = new ArrayList<>()
-        {
-            {
-                add(new Coordinate(coordinate.row - 1, coordinate.column + 1));
-                add(new Coordinate(coordinate.row - 1, coordinate.column));
-                add(new Coordinate(coordinate.row - 1, coordinate.column - 1));
-                add(new Coordinate(coordinate.row, coordinate.column + 1));
-                add(new Coordinate(coordinate.row, coordinate.column - 1));
-                add(new Coordinate(coordinate.row + 1, coordinate.column + 1));
-                add(new Coordinate(coordinate.row + 1, coordinate.column));
-                add(new Coordinate(coordinate.row + 1, coordinate.column - 1));
-            }
-        };
+        final List<Coordinate> neighborCoordinates = new ArrayList<>();
+
+        neighborCoordinates.add(new Coordinate(coordinate.row - 1, coordinate.column + 1));
+        neighborCoordinates.add(new Coordinate(coordinate.row - 1, coordinate.column));
+        neighborCoordinates.add(new Coordinate(coordinate.row - 1, coordinate.column - 1));
+        neighborCoordinates.add(new Coordinate(coordinate.row, coordinate.column + 1));
+        neighborCoordinates.add(new Coordinate(coordinate.row, coordinate.column - 1));
+        neighborCoordinates.add(new Coordinate(coordinate.row + 1, coordinate.column + 1));
+        neighborCoordinates.add(new Coordinate(coordinate.row + 1, coordinate.column));
+        neighborCoordinates.add(new Coordinate(coordinate.row + 1, coordinate.column - 1));
 
         neighborCoordinates.removeIf(c -> !isValidCoordinate(c));
 

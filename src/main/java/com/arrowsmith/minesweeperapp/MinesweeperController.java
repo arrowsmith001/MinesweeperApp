@@ -39,19 +39,10 @@ public class MinesweeperController {
         infoText.setText("");
 
         ms.generateGrid();
+
         final Grid grid = ms.grid;
 
-        gridPane.getChildren().clear();
-        gridPane.getRowConstraints().clear();
-        gridPane.getColumnConstraints().clear();
-
-        for (int i = 0; i < ms.grid.columns; i++) {
-            gridPane.getRowConstraints().add(new RowConstraints(d));
-        }
-        for (int j = 0; j < ms.grid.rows; j++) {
-            gridPane.getColumnConstraints().add(new ColumnConstraints(d));
-        }
-
+        setRowConstraints();
 
         vms = new SquareViewModel[grid.rows][grid.columns];
 
@@ -71,6 +62,19 @@ public class MinesweeperController {
 
 
         gridIsClickable = true;
+    }
+
+    private void setRowConstraints() {
+        gridPane.getChildren().clear();
+        gridPane.getRowConstraints().clear();
+        gridPane.getColumnConstraints().clear();
+
+        for (int i = 0; i < ms.grid.columns; i++) {
+            gridPane.getRowConstraints().add(new RowConstraints(d));
+        }
+        for (int j = 0; j < ms.grid.rows; j++) {
+            gridPane.getColumnConstraints().add(new ColumnConstraints(d));
+        }
     }
 
     boolean gridIsClickable = true;
@@ -100,17 +104,16 @@ public class MinesweeperController {
 
                 final WinState winState = ms.getWinState();
 
-                if(winState == WinState.lost)
+                if(winState == WinState.LOST)
                 {
                     onGameLost();
                 }
-                if(winState == WinState.won)
+                if(winState == WinState.WON)
                 {
                     onGameWon();
                 }
             }
         }
-
 
         updateGridLabels();
 
@@ -173,7 +176,7 @@ class SquareViewModel
 
     private Paint generateLabelColor() {
 
-        if(square.getState() != SquareState.numbered) return Color.BLACK;
+        if(square.getState() != SquareState.NUMBERED) return Color.BLACK;
 
         switch (square.getNeighborMineCount())
         {
@@ -185,9 +188,10 @@ class SquareViewModel
             case 6: return Color.rgb(255, 66, 0);
             case 7: return Color.rgb(255, 33, 0);
             case 8: return Color.rgb(255, 0, 0);
+            default: return Color.BLACK;
         }
 
-        return Color.BLACK;
+
     }
 
 
@@ -195,19 +199,19 @@ class SquareViewModel
     {
         switch (square.getState())
         {
-            case hidden -> {
+            case HIDDEN -> {
                 return "?";
             }
-            case flagged -> {
+            case FLAGGED -> {
                 return "#";
             }
-            case empty -> {
+            case EMPTY -> {
                 return "";
             }
-            case numbered -> {
+            case NUMBERED -> {
                 return Integer.toString(square.getNeighborMineCount());
             }
-            case mined -> {
+            case MINED -> {
                 return "X";
             }
         }

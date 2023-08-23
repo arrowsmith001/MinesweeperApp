@@ -1,6 +1,5 @@
 package com.arrowsmith.minesweeper.model;
 
-import com.arrowsmith.minesweeper.exceptions.MineUncoveredException;
 import com.arrowsmith.minesweeperapp.SquareState;
 
 import java.util.LinkedList;
@@ -14,25 +13,25 @@ public class Square
         {
             if(isFlagged)
             {
-                return SquareState.flagged;
+                return SquareState.FLAGGED;
             }
             else
             {
-                return SquareState.hidden;
+                return SquareState.HIDDEN;
             }
         }
         else if(hasMine)
         {
-            return SquareState.mined;
+            return SquareState.MINED;
         }
         else
         {
             final int neighborCount = getNeighborMineCount();
             if(neighborCount > 0)
             {
-                return SquareState.numbered;
+                return SquareState.NUMBERED;
             }
-            else return SquareState.empty;
+            else return SquareState.EMPTY;
         }
     }
 

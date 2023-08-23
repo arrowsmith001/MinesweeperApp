@@ -12,8 +12,8 @@ class MinesweeperOptionsTest {
     void defaultOptions() {
         final MinesweeperOptions options = new MinesweeperOptions();
 
-        final boolean isMediumDifficulty = options.getDifficulty() == Difficulty.Medium;
-        final boolean isMediumSize = options.getBoardSize() == BoardSize.Medium;
+        final boolean isMediumDifficulty = options.getDifficulty() == Difficulty.MEDIUM;
+        final boolean isMediumSize = options.getBoardSize() == BoardSize.MEDIUM;
 
         assertAll(
                 () -> assertTrue(isMediumDifficulty),
